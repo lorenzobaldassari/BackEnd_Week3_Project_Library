@@ -22,12 +22,10 @@ public class Prestito {
     private LocalDate rentEffectiveEndDate;
 
     @ManyToOne
-//    (cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private Utente utente;
 
     @OneToOne
-//            (cascade = CascadeType.ALL)
     @JoinColumn(name = "prestito_id",unique = true)
     private TextObject object;
 

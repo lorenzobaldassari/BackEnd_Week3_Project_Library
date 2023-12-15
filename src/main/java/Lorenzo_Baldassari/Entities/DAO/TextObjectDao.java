@@ -5,6 +5,7 @@ import Lorenzo_Baldassari.Entities.TextObject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.List;
 
 public class TextObjectDao {
@@ -75,14 +76,28 @@ public class TextObjectDao {
     }
 
     public void findByPartialTitle(String title){
-        Query getELementByISBNN= em.createQuery("SELECT t FROM TextObject t WHERE t.title LIKE :title",TextObject.class);
-        getELementByISBNN.setParameter("title","%"+title+"%");
-        List<TextObject> elementsToFind= getELementByISBNN.getResultList();
+        Query getELementBypartialTitlte= em.createQuery("SELECT t FROM TextObject t WHERE t.title LIKE :title",TextObject.class);
+        getELementBypartialTitlte.setParameter("title","%"+title+"%");
+        List<TextObject> elementsToFind= getELementBypartialTitlte.getResultList();
         if (elementsToFind.size()>0){
             System.out.println("elemento trovato");
             elementsToFind.forEach(elem->System.out.println(elem));
         }else{
             System.out.println("titolo non trovato");
+        }
+    }    public void findByRelaseYear(int year){
+        Query getELementByYear= em.createQuery("SELECT t FROM TextObject t",TextObject.class);
+        List<TextObject> elementsToFind= getELementByYear.getResultList();
+
+        if(elementsToFind.size()>0){
+                System.out.println("elementi dell'anno"+year+":");
+            elementsToFind.forEach(elem->{
+                if((elem.getRelaseDate().getYear())==year){
+                    System.out.println(elem);
+                }
+            });
+        }else{
+            System.out.println(" non ci sono prodottinel database");
         }
     }
 

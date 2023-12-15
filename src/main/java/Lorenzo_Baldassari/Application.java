@@ -71,6 +71,7 @@ public class Application {
 
         Prestito rentByRaiden= new Prestito(LocalDate.now(),raiden,spiderman);
         Prestito rentByGianni= new Prestito(LocalDate.now(),gianni,donnaModerna);
+//        rentByGianni.setRentEffectiveEndDate(LocalDate.of(2025,12,25));
 
 //        uteDao.save(gianni);
 //        uteDao.save(raiden);
@@ -79,9 +80,9 @@ public class Application {
 //        objecDao.save(spiderman);
 //        prestDao.save(rentByRaiden);
 //        prestDao.save(rentByGianni);
-
-//        TextObject bookFromDb= objecDao.findById(110);
-//        Utente raidenFromdb=uteDao.findById(108);
+//
+//        Utente raidenFromdb=uteDao.findById(137);
+//        TextObject bookFromDb= objecDao.findById(140);
 //        Prestito rentByRaidenFromDb= new Prestito(LocalDate.now(),raidenFromdb,bookFromDb);
 //        prestDao.save(rentByRaidenFromDb);
 
@@ -104,6 +105,8 @@ public class Application {
 
 //        4)ricerca per anno di pubblicazione
 
+            objecDao.findByRelaseYear(2005);
+
 //        5) ricerca per autore
 
 //        bookDao.findByWriter("Marvel");
@@ -112,6 +115,13 @@ public class Application {
 
 //        objecDao.findByPartialTitle("spi");
 
+//        7)ricerca per numero di tessera se ci sono libri in presito
+
+//        prestDao.findByCardNumberFromRented("841161616516");
+
+//        8)Ricerca prestiti scaduti non ancora restituiti
+
+//        prestDao.findByOutOfDateRent();
 
 
         System.out.println("funziona tutto, FINE!");
