@@ -4,6 +4,7 @@ import javax.lang.model.element.Name;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "prestito")
@@ -21,20 +22,25 @@ public class Prestito {
     private LocalDate rentEffectiveEndDate;
 
     @ManyToOne
-    @JoinColumn(name = "id_utente")
+//    (cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private Utente utente;
 
-    @OneToMany(mappedBy = "prestito")
-    private List<TextObject> rentedObjects;
+    @OneToOne
+//            (cascade = CascadeType.ALL)
+    @JoinColumn(name = "prestito_id",unique = true)
+    private TextObject object;
 
 
-    public Prestito(LocalDate rentStartDate, Utente utente,List<TextObject> rentedObjects) {
+    public Prestito(LocalDate rentStartDate, Utente utente,TextObject rentedObjects) {
         this.rentStartDate = rentStartDate;
         this.rentAssumedEndDate = rentStartDate.plusDays(30);
         this.utente = utente;
-        this.rentedObjects = rentedObjects;
+        this.object = rentedObjects;
     }
 
+    public Prestito() {
+    }
 
     public long getId() {
         return id;
@@ -56,8 +62,8 @@ public class Prestito {
         return utente;
     }
 
-    public List<TextObject> getRentedObjects() {
-        return rentedObjects;
+    public TextObject getRentedObjects() {
+        return object;
     }
 
 
@@ -77,8 +83,8 @@ public class Prestito {
         this.utente = utente;
     }
 
-    public void setRentedObjects(List<TextObject> rentedObjects) {
-        this.rentedObjects = rentedObjects;
+    public void setRentedObjects(TextObject rentedObjects) {
+        this.object = rentedObjects;
     }
 
     @Override
@@ -89,7 +95,7 @@ public class Prestito {
                 ", rentAssumedEndDate=" + rentAssumedEndDate +
                 ", rentEffectiveEndDate=" + rentEffectiveEndDate +
                 ", utente=" + utente +
-                ", rentedObjects=" + rentedObjects +
+                ", rentedObjects=" + object +
                 '}';
     }
 }

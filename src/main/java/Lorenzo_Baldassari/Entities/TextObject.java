@@ -1,6 +1,7 @@
 package Lorenzo_Baldassari.Entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="oggetto_estuale")
@@ -17,15 +18,14 @@ public abstract class TextObject {
     @Column(name="titolo")
     protected  String title;
     @Column(name="anno_di_pubblicazione")
-    protected  String relaseDate;
+    protected LocalDate relaseDate;
     @Column(name="numero_di_pagine")
     protected int numberOfPAge;
 
-    @ManyToOne
-    @JoinColumn(name = "prestito_id")
+    @OneToOne(mappedBy = "object")
     private Prestito prestito;
 
-    public TextObject(String ISBNcode, String title, String relaseDate, int numberOfPAge) {
+    public TextObject(String ISBNcode, String title, LocalDate relaseDate, int numberOfPAge) {
         this.ISBNcode = ISBNcode;
         this.title = title;
         this.relaseDate = relaseDate;
@@ -51,11 +51,11 @@ public abstract class TextObject {
         this.title = title;
     }
 
-    public String getRelaseDate() {
+    public LocalDate getRelaseDate() {
         return relaseDate;
     }
 
-    public void setRelaseDate(String relaseDate) {
+    public void setRelaseDate(LocalDate relaseDate) {
         this.relaseDate = relaseDate;
     }
 

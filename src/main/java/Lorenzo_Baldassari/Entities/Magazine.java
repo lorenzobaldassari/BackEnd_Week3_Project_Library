@@ -6,6 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.time.LocalDate;
 
 @Entity
 @DiscriminatorValue("rivista")
@@ -15,7 +16,7 @@ public class Magazine extends TextObject {
     protected Periodicita periodicita;
 
 
-    public Magazine(String ISBNcode, String title, String relaseDate, int numberOfPAge, Periodicita periodicita) {
+    public Magazine(String ISBNcode, String title, LocalDate relaseDate, int numberOfPAge, Periodicita periodicita) {
         super(ISBNcode, title, relaseDate, numberOfPAge);
         this.periodicita = periodicita;
     }

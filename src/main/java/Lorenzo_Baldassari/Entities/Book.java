@@ -6,6 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.time.LocalDate;
 
 @Entity
 @DiscriminatorValue("libro")
@@ -16,7 +17,7 @@ public class Book extends TextObject{
     @Enumerated(EnumType.STRING)
     protected Genere genere;
 
-    public Book(String ISBNcode, String title, String relaseDate, int numberOfPAge, String autore, Genere genere) {
+    public Book(String ISBNcode, String title, LocalDate relaseDate, int numberOfPAge, String autore, Genere genere) {
         super(ISBNcode, title, relaseDate, numberOfPAge);
         this.autore = autore;
         this.genere = genere;
