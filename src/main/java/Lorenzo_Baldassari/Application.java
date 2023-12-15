@@ -1,6 +1,7 @@
 package Lorenzo_Baldassari;
 
 import Lorenzo_Baldassari.Entities.*;
+import Lorenzo_Baldassari.Entities.DAO.BookDao;
 import Lorenzo_Baldassari.Entities.DAO.PrestitoDao;
 import Lorenzo_Baldassari.Entities.DAO.TextObjectDao;
 import Lorenzo_Baldassari.Entities.DAO.UtenteDao;
@@ -21,13 +22,19 @@ public class Application {
 
         //commento introduttivo per riccardo!
         //ciao! due parole sull'impostazione delle relazioni: ho utilizzato il oneToOne per collegare prestito a
-        //libro perche oltre che dalla consegna richiede elemnto unico prestato ma perche ragionando ho trovato utile
-        //associare ad una istanza di prestito un solo elemento piuttosto che una lista
+        //libro perche dalla consegna ho capito richiere un solo elemento prestato ma perche ragionando ho trovato utile
+        //associare ad una istanza di prestito un solo elemento piuttosto che una lista; premetto che avevo inizialmente
+        //impostato per essere una lista di elementi per presito semplicemnte sostituendo TextObject con List<TextObject>
+        //e cambiando la relazione in many to one (nelle operazioni commentate utilizzate per creare il database puoi
+        // trovare ancora le liste create inizalmente che non cancello volutamente)
+
         //mentre ho utilizzato un one to many per collegare utnete a prestito perche ho pensato che un utente puo fare
         //piu istanze di prestito
         //infine ho utilizzato TABLE PER CLASS per unire le entita in relazione perche mi interessava che ogni istanza di rivista
         // o libro mostrasse tutti i propri dati ,nascondendo la classe astratta TextObject per generarli; non ho usato
         //single table perche non volevo mostrare valori null
+
+        //le operazioni richieste si trovano in fondo prima del "hello world"
 
         //-----------START------------------
 
@@ -35,6 +42,7 @@ public class Application {
         PrestitoDao prestDao= new PrestitoDao(em);
         UtenteDao uteDao= new UtenteDao(em);
         TextObjectDao objecDao= new TextObjectDao(em);
+        BookDao bookDao= new BookDao(em);
 
         Book spiderman= new Book("D1AS1-asda1sd","spiderman nella notte oscura",
                 LocalDate.of(2001,5,20),
@@ -50,6 +58,17 @@ public class Application {
         Utente raiden= new Utente("Gianluca","Raiden",
                 LocalDate.of(1986,7,18),"841841165151");
 
+        //----------------------------------------------
+        //sezione liste che ho deciso di non utilizzare cambianso in una relazione on to one
+//        List<TextObject> raidenRentList= new ArrayList<>();
+//        List<TextObject> gianniRentList= new ArrayList<>();
+//
+//        raidenRentList.add(wolverine);
+//        raidenRentList.add(spiderman);
+//        gianniRentList.add(donnaModerna);
+//        --------------------------------------------------------------------
+
+
         Prestito rentByRaiden= new Prestito(LocalDate.now(),raiden,spiderman);
         Prestito rentByGianni= new Prestito(LocalDate.now(),gianni,donnaModerna);
 
@@ -61,16 +80,37 @@ public class Application {
 //        prestDao.save(rentByRaiden);
 //        prestDao.save(rentByGianni);
 
+//        TextObject bookFromDb= objecDao.findById(110);
+//        Utente raidenFromdb=uteDao.findById(108);
+//        Prestito rentByRaidenFromDb= new Prestito(LocalDate.now(),raidenFromdb,bookFromDb);
+//        prestDao.save(rentByRaidenFromDb);
 
 
 
+//        OPERAZIONI DELLA CONSEGNA-----------------i codici sono nei rispettivi Dao
 
 
-        TextObject bookFromDb= objecDao.findById(110);
-        Utente raidenFromdb=uteDao.findById(108);
-        Prestito rentByRaidenFromDb= new Prestito(LocalDate.now(),raidenFromdb,bookFromDb);
-        prestDao.save(rentByRaidenFromDb);
+//       1) aggiunta elemento al catalogo
 
+//        objecDao.save(spiderman);
+
+//        2)rimozione elemento dal catalogo
+
+//        objecDao.findByISBNAndDelete("D1DAFA-snduja5");
+
+//        3) ricerca per ISBN
+
+//        objecDao.findByISBN("D1DAFA-sndSDASDja5");
+
+//        4)ricerca per anno di pubblicazione
+
+//        5) ricerca per autore
+
+//        bookDao.findByWriter("Marvel");
+
+//        6) ricerca per titolo o parte di esso
+
+//        objecDao.findByPartialTitle("spi");
 
 
 
