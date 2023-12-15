@@ -71,7 +71,7 @@ public class Application {
 
         Prestito rentByRaiden= new Prestito(LocalDate.now(),raiden,spiderman);
         Prestito rentByGianni= new Prestito(LocalDate.now(),gianni,donnaModerna);
-//        rentByGianni.setRentEffectiveEndDate(LocalDate.of(2025,12,25));
+        rentByGianni.setRentEffectiveEndDate(LocalDate.of(2025,12,25));
 
 //        uteDao.save(gianni);
 //        uteDao.save(raiden);
