@@ -105,7 +105,7 @@ public class Application {
 
 //        4)ricerca per anno di pubblicazione
 
-            objecDao.findByRelaseYear(2005);
+//            objecDao.findByRelaseYear(2005);
 
 //        5) ricerca per autore
 
